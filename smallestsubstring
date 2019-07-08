@@ -1,0 +1,27 @@
+total= 256
+def distinct(string,n): 
+    count=[0]*total 
+    for i in range(n): 
+        count[ord(string[i])]+=1
+    max=0
+    for i in range(total): 
+        if (count[i]!=0): 
+            max+=1    
+    return max 
+def smallsubstring(string):
+    n=len(string)
+    max=distinct(string,n) 
+    min=n
+    for i in range (n):
+        for j in range(n):
+            substring=string[i:j]
+            substringlen=len(substring)
+            subdistinct=distinct(substring,substringlen)
+            if (substringlen<min and max==subdistinct): 
+                min=substringlen
+    return min
+
+if __name__=="__main__": 
+    string=input('Enter the string : ')
+    result=smallsubstring(string); 
+    print('Maximum number of distinct characters : ',result)
